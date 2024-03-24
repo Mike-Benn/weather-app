@@ -3,10 +3,6 @@ export { PageController };
 
 
 function PageController() {
-    let weatherContainer = document.querySelector('.weather-container');
-    let primaryWeather = document.querySelector('.primary-weather');
-    let secondaryWeather = document.querySelector('.secondary-weather');
-    
 
     const button = document.querySelector('#search-button');
     button.addEventListener('click' , getCurrentWeather);
@@ -19,17 +15,7 @@ function PageController() {
         currentWeather = value;
     }
 
-    function round(number) {
-        let value = number - Math.floor(number);
-    
-        if (value < 0.5) {
-            return Math.floor(number);
-        } else {
-            return Math.ceil(number);
-        }
-    };
-
-    async function getCurrentWeather() {
+    const getCurrentWeather = async function () {
         let search = document.querySelector('#search-bar');
         let url = BASE_URL + search;
         const response = await fetch(url , {mode: 'cors'});
@@ -44,6 +30,28 @@ function PageController() {
         setWeather(weather);
         
     }
+
+    function round(number) {
+        let value = number - Math.floor(number);
+    
+        if (value < 0.5) {
+            return Math.floor(number);
+        } else {
+            return Math.ceil(number);
+        }
+    };
+
+    return {
+        getWeather,
+        setWeather,
+        getCurrentWeather
+
+    }
+
+
+    
+
+    
     
 
 }
